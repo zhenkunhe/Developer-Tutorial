@@ -1,0 +1,4 @@
+sudo apt-get install xsltproc
+sudo apt-get install docbook-xsl
+sudo apt-get install docbook-defguide
+xsltproc -o test.html /usr/share/xml/docbook/stylesheet/nwalsh/xhtml/docbook.xsl test.xml

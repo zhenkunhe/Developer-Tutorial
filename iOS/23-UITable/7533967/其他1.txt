@@ -1,0 +1,117 @@
+繼承是物件導向的一個重要環節，最主要是提供軟體元件的可重複使用性，藉此提升開發效率。仔細回想前面教學的每一個Class物件應用，其實我們一直以來都繼承NSObject，舉例來說，因為它你的物件得以有init初始化方法。繼承老生常談的解釋方法為:因為老爸有的東西，孩子繼承了父親的一切，即可享有老子的一切，當然孩子還是可以將自身能力(Class)擴充。以下對繼承做簡易的示範:
+@interface
+
+
+
+#import <Foundation/Foundation.h>
+
+@interface BaseObject : NSObject{
+int posX;
+int posY;
+}
+@property int posX, posY;
+
+-(void)showPositionXY;
+
+@end
+
+
+宣告一個物體基底類別，此物體有兩個基本屬性變性 : 座標X & 座標Y。
+
+於此提供一個顯示座標資訊的方法。
+
+@implementation
+
+
+
+#import "BaseObject.h"
+
+@implementation BaseObject
+
+@synthesize posX, posY;
+
+-(void)showPositionXY
+{
+NSLog(@"posX : %d posY : %d",posX, posY);
+}
+
+@end
+
+定義屬性變數@synthesize讓程式編譯時產生getter & setter，並且實作出.h檔定義的方法。
+
+到此為止跟之前學到的基本類別建立並沒有什麼不一樣的地方。
+
+@interface
+
+
+
+#import "BaseObject.h"
+
+@interface Rectangle : BaseObject{
+int width;
+int height;
+}
+@property int width;
+@property int height;
+
+-(void) showArea;
+-(void)showObjectAllInfo;
+
+@end
+
+再新增一個類別Rectangle代表長方型物件，此物件跟以往繼承NSObject不一樣，改為繼承我們剛剛建立的物體基底類別BaseObject，而NSObject本身有繼承自NSObject，所以Rectangle同時也保有NSObject物件的所有特性。
+
+此類別繼承自BaseObject物體基底物件，延伸成為一個長方形物件，所以我們再Rectangle這個類別裡有多宣告了兩個客制化的屬性變數:寬&高，並新增兩個方法顯示訊息資訊。
+
+@implementation
+
+
+
+#import "Rectangle.h"
+
+@implementation Rectangle
+
+@synthesize width, height;
+
+-(void) showArea
+{
+NSLog(@"Rectangle Area : %d", width * height);
+}
+-(void)showObjectAllInfo
+{
+NSLog(@"posX: %d posY: %d width: %d height: %d",posX, posY, width, height);
+}
+
+@end
+
+此實作檔需要注意的地方再showObjectAllInfo這個方法裡準備要秀出的資訊包含了非本身類別內的屬性變數-> posX & posY，由此可證明了剛剛提到的論調，Rectangle繼承了BaseObject當然理應擁有其所有的一切，恰恰posX & posY就是BaseObject的屬性成員，Rectangle也就順理成章可以取用這些資源。
+
+@main
+
+
+
+#import <Foundation/Foundation.h>
+#import "Rectangle.h"
+
+int main(int argc, const char * argv[])
+{
+NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+Rectangle *rectangle = [[[Rectangle alloc] init]autorelease];
+[rectangle setPosX:30];
+[rectangle setPosY:100];
+[rectangle showPositionXY];
+
+[rectangle setWidth:50];
+[rectangle setHeight:80];
+[rectangle showArea];
+
+[rectangle showObjectAllInfo];
+
+[pool drain];
+}
+
+®輸出結果 :
+ posX : 30 posY : 100
+ Rectangle Area : 4000
+ posX: 30 posY: 100 width: 50 height: 80

@@ -1,0 +1,27 @@
+// Decompiled by DJ v3.7.7.81 Copyright 2004 Atanas Neshkov  Date: 2005/10/4 ¤U¤È 03:37:30
+// Home Page : http://members.fortunecity.com/neshkov/dj.html  - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   InnerEX.java
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JLabel;
+
+class InnerEX$alClickME
+    implements ActionListener
+{
+
+    public void actionPerformed(ActionEvent actionevent)
+    {
+        clickCount++;
+        label.setText((new StringBuilder()).append("[").append(actionevent.getActionCommand()).append("] \u6309\u9215\u88AB\u6309\u4E86").append(clickCount).append("\u6B21").toString());
+    }
+
+    final InnerEX this$0;
+
+    InnerEX$alClickME()
+    {
+        this$0 = InnerEX.this;
+        super();
+    }
+}

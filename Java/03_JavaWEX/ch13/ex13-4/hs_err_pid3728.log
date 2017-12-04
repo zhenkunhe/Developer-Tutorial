@@ -1,0 +1,135 @@
+#
+# An unexpected error has been detected by Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x6d9f04cd, pid=3728, tid=3756
+#
+# Java VM: Java HotSpot(TM) Client VM (10.0-b19 mixed mode, sharing windows-x86)
+# Problematic frame:
+# V  [jvm.dll+0x1804cd]
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x01588400):  VMThread [stack: 0x01660000,0x016b0000] [id=3756]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x24c38ae8
+
+Registers:
+EAX=0x24c38ae0, EBX=0x016afc28, ECX=0x24c38ae8, EDX=0x26c38ae8
+ESP=0x016afb94, EBP=0x015619f8, ESI=0x232d5000, EDI=0x232da0c8
+EIP=0x6d9f04cd, EFLAGS=0x00010293
+
+Top of Stack: (sp=0x016afb94)
+0x016afb94:   015618e8 016afc28 016afc28 01564f5c
+0x016afba4:   6d91d0bf 016afc28 01564f08 00000001
+0x016afbb4:   6d9171eb 016afc28 00000000 01564f08
+0x016afbc4:   016afc60 00138000 6d904797 00000000
+0x016afbd4:   016afbfc 016afc28 01562eb0 6d905a28
+0x016afbe4:   01566208 01564f58 01564f08 0000000c
+0x016afbf4:   015885c8 004ee058 6da4b858 01566208
+0x016afc04:   01562eb0 01562eb0 229d0000 01562e48 
+
+Instructions: (pc=0x6d9f04cd)
+0x6d9f04bd:   8d 49 00 8b 7d 34 3b f7 73 17 8b 46 04 8d 48 08
+0x6d9f04cd:   8b 01 53 56 ff 90 04 01 00 00 8d 34 86 3b f7 72 
+
+
+Stack: [0x01660000,0x016b0000],  sp=0x016afb94,  free space=318k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x1804cd]
+
+VM_Operation (0x01f9f260): GenCollectForAllocation, mode: safepoint, requested by thread 0x0029fc00
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x015e7800 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=3784, stack(0x04fa0000,0x053a0000)]
+  0x015d1000 JavaThread "CompilerThread0" daemon [_thread_blocked, id=3780, stack(0x019d0000,0x01a20000)]
+  0x015d0400 JavaThread "Attach Listener" daemon [_thread_blocked, id=3776, stack(0x04ba0000,0x04fa0000)]
+  0x015fd400 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=3772, stack(0x047a0000,0x04ba0000)]
+  0x0158a400 JavaThread "Finalizer" daemon [_thread_blocked, id=3768, stack(0x043a0000,0x047a0000)]
+  0x01589400 JavaThread "Reference Handler" daemon [_thread_blocked, id=3764, stack(0x03fa0000,0x043a0000)]
+  0x0029fc00 JavaThread "main" [_thread_blocked, id=3752, stack(0x01ba0000,0x01fa0000)]
+
+Other Threads:
+=>0x01588400 VMThread [stack: 0x01660000,0x016b0000] [id=3756]
+  0x015ea800 WatcherThread [stack: 0x01a20000,0x01a70000] [id=3788]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x0029f128/0x00000110] Threads_lock - owner thread: 0x01588400
+[0x0029d460/0x00000150] Heap_lock - owner thread: 0x0029fc00
+
+Heap
+ def new generation   total 960K, used 959K [0x229d0000, 0x22ad0000, 0x22eb0000)
+  eden space 896K, 100% used [0x229d0000, 0x22ab0000, 0x22ab0000)
+  from space 64K,  99% used [0x22ac0000, 0x22acfff8, 0x22ad0000)
+  to   space 64K, 100% used [0x22ab0000, 0x22ac0000, 0x22ac0000)
+ tenured generation   total 7168K, used 4302K [0x22eb0000, 0x235b0000, 0x269d0000)
+   the space 7168K,  60% used [0x22eb0000, 0x232e3b90, 0x232e3c00, 0x235b0000)
+ compacting perm gen  total 12288K, used 2529K [0x269d0000, 0x275d0000, 0x2a9d0000)
+   the space 12288K,  20% used [0x269d0000, 0x26c48700, 0x26c48800, 0x275d0000)
+    ro space 8192K,  66% used [0x2a9d0000, 0x2af20dc8, 0x2af20e00, 0x2b1d0000)
+    rw space 12288K,  52% used [0x2b1d0000, 0x2b8204b0, 0x2b820600, 0x2bdd0000)
+
+Dynamic libraries:
+0x00400000 - 0x0040a000 	C:\Program Files\Java\jdk1.6.0_05\bin\javac.exe
+0x771c0000 - 0x772de000 	C:\Windows\system32\ntdll.dll
+0x77320000 - 0x773f8000 	C:\Windows\system32\kernel32.dll
+0x6d010000 - 0x6d025000 	C:\Program Files\Java\jdk1.6.0_05\bin\jli.dll
+0x75b50000 - 0x75c0f000 	C:\Windows\system32\ADVAPI32.dll
+0x76f30000 - 0x76ff3000 	C:\Windows\system32\RPCRT4.dll
+0x7c340000 - 0x7c396000 	C:\Program Files\Java\jdk1.6.0_05\bin\MSVCR71.dll
+0x001f0000 - 0x00246000 	C:\Program Files\Java\jdk1.6.0_05\jre\bin\msvcr71.dll
+0x6d870000 - 0x6dac0000 	C:\Program Files\Java\jdk1.6.0_05\jre\bin\client\jvm.dll
+0x76870000 - 0x7690e000 	C:\Windows\system32\USER32.dll
+0x75a80000 - 0x75acb000 	C:\Windows\system32\GDI32.dll
+0x74590000 - 0x745c3000 	C:\Windows\system32\WINMM.dll
+0x76910000 - 0x769ba000 	C:\Windows\system32\msvcrt.dll
+0x76d50000 - 0x76e94000 	C:\Windows\system32\ole32.dll
+0x77000000 - 0x7708c000 	C:\Windows\system32\OLEAUT32.dll
+0x74550000 - 0x74588000 	C:\Windows\system32\OLEACC.dll
+0x77300000 - 0x7731e000 	C:\Windows\system32\IMM32.DLL
+0x75c10000 - 0x75cd7000 	C:\Windows\system32\MSCTF.dll
+0x75880000 - 0x758ac000 	C:\Windows\system32\apphelp.dll
+0x772f0000 - 0x772f9000 	C:\Windows\system32\LPK.DLL
+0x75ad0000 - 0x75b4d000 	C:\Windows\system32\USP10.dll
+0x6d320000 - 0x6d328000 	C:\Program Files\Java\jdk1.6.0_05\jre\bin\hpi.dll
+0x759e0000 - 0x759e7000 	C:\Windows\system32\PSAPI.DLL
+0x6d820000 - 0x6d82c000 	C:\Program Files\Java\jdk1.6.0_05\jre\bin\verify.dll
+0x6d3c0000 - 0x6d3df000 	C:\Program Files\Java\jdk1.6.0_05\jre\bin\java.dll
+0x6d860000 - 0x6d86f000 	C:\Program Files\Java\jdk1.6.0_05\jre\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Denv.class.path=.;C:\Program Files\Microsoft SQL Server 2005 JDBC Driver\sqljdbc_1.2\cht\sqljdbc.jar;C:\JavaWEX\ch20\Ftp\jvftp\lib\jvftp.jar;C:\JavaWEX\ch20\Ftp\jvftp\lib\jvftp-AWT.jar;C:\JavaWEX\ch20\Ftp\jvftp\lib\jvftplib.jar;C:\JavaWEX\packages;C:\Program Files\JMF2.1.1e\lib\sound.jar;C:\Program Files\JMF2.1.1e\lib\jmf.jar; -Dapplication.home=C:\Program Files\Java\jdk1.6.0_05 -Xms8m -Xss4m -ea:com.sun.tools... 
+java_command: com.sun.tools.javac.Main InputEX.java
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.6.0_05
+CLASSPATH=.;C:\Program Files\Microsoft SQL Server 2005 JDBC Driver\sqljdbc_1.2\cht\sqljdbc.jar;C:\JavaWEX\ch20\Ftp\jvftp\lib\jvftp.jar;C:\JavaWEX\ch20\Ftp\jvftp\lib\jvftp-AWT.jar;C:\JavaWEX\ch20\Ftp\jvftp\lib\jvftplib.jar;C:\JavaWEX\packages;C:\Program Files\JMF2.1.1e\lib\sound.jar;C:\Program Files\JMF2.1.1e\lib\jmf.jar;
+PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Program Files\Microsoft SQL Server\90\Tools\binn\;C:\Program Files\Java\jdk1.6.0_05\bin
+USERNAME=julianno
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 15 Model 1 Stepping 3, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows Vista Build 6000 
+
+CPU:total 1 (1 cores per cpu, 1 threads per core) family 15 model 1 stepping 3, cmov, cx8, fxsr, mmx, sse, sse2
+
+Memory: 4k page, physical 785344k(351244k free), swap 1845668k(1367112k free)
+
+vm_info: Java HotSpot(TM) Client VM (10.0-b19) for windows-x86 JRE (1.6.0_05-b13), built on Feb 22 2008 01:16:53 by "java_re" with MS VC++ 7.1
+
+time: Sun Apr 13 21:16:22 2008
+elapsed time: 2 seconds
+

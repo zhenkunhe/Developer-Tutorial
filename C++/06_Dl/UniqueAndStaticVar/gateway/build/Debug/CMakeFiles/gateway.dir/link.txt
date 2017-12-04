@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/gateway.dir/src/main.cpp.o  -o gateway  -L/home/alex/workspace/c++/gateway/../gatewaySDK/build/Debug -rdynamic -lgatewaySDK -Wl,-rpath,/home/alex/workspace/c++/gateway/../gatewaySDK/build/Debug 

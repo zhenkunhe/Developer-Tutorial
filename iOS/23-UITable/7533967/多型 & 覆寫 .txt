@@ -1,0 +1,184 @@
+多型與繼承在任何物件導向語言都是緊緊結合在一起的。多型的意義在於物件能夠在執行階段依照不同情況變換資料型態，換句話說，多型是指一個物件參考能夠在不同環境下，擁有不同的特性。一個物件要實現多型可透過實作多個繼承(包含向下繼承 例如: A繼承B,B又繼承C)或介面來實現父類別內已存在相同名稱的方法內容，多數語言為了可讀性會使用Override注義於開頭宣告供辨識，Override即為將父類別原本的方法取代。舉個簡單的例子來說，A物件定義了一個"reset"方法名稱，此時B物件繼承了A物件，並在B物件本身又宣告一個一模一樣的"reset"方法名稱，而此種情況下當有人生成了B物件欲使用 "reset"方法時，"reset"方法只會執行B物件複寫過內容，而對B物件來說A物件的"reset"依然存在，如必要連A物件內的方法一起執行，此時B物件應呼叫 [super reset] 來請他老爸執行他的"reset"方法。以下示範程式實例 :
+@interface
+
+
+
+#import <Foundation/Foundation.h>
+
+@interface BaseObject : NSObject{
+int length, width, height;
+
+}
+@property int length, width, height;
+
+-(double) getArea;
+
+@end
+
+一樣的我們新增一個做為物體基底的類別BaseObject，並宣告了四種關於尺寸的屬性變數 : 長,寬,高,半徑，且提供一個方法供外部提取物體體積數據。
+
+@implementation
+
+
+
+#import "BaseObject.h"
+
+@implementation BaseObject
+
+@synthesize length, width, height;
+
+-(double)getArea
+{
+return length * width;
+}
+
+@end
+
+實作getArea方法，但僅僅做最簡單的長方形面積運算並回傳。
+
+@interface
+
+
+
+#import "BaseObject.h"
+
+@interface Rectangle : BaseObject{
+
+}
+
+-(double) getArea;
+
+@end
+
+新增Rectangle長方形物件並繼承BaseObject物體基底，在這裡可以看到Rectangle宣告了跟他老爸一模一樣的方法。一經宣告後，此時父類別BaseObject中的getArea方法已然被覆寫。
+
+@implementation
+
+
+
+#import "Rectangle.h"
+
+@implementation Rectangle
+
+-(double) getArea
+{
+return [super getArea];
+}
+
+@end
+
+剛才提到說一經宣告父類別的相同方法及被取代，但僅僅對於外部呼叫Rectangle而言是如此，而父類別的所有一切對Rectangle來說一直都是存在的，如欲調用父類別以存在的方法或屬性只需以關鍵字super做為呼叫，隨後加上欲呼叫的屬性或法方即可。此段的用意在於簡單證明父類別的調用，長方形的面積計算方式是 長 * 寬 ，而恰恰與父類別BaseObject的getArea方法預設計算方式相同，所有簡而化之直接呼叫父類別的方法計算後回傳給，接收到值後直接在回傳給呼叫Rectangle物件getArea的人。
+
+@interface
+
+
+
+#import "BaseObject.h"
+#import "BaseObject.h"
+
+@interface Circle : BaseObject{
+int radius;
+}
+@property int radius;
+
+-(double) getArea;
+
+@end
+
+建構一Circle圓形物件並覆寫其父類別方法，並在此物體物件內新增一獨有屬性radius(半徑)。 PS:這簡簡單單的新增一獨有變數其實就是再說明多型的特性，雖然圓形也是物體的種類，但他多了其他物體不需要的屬性"半徑"，但還是與其它物體形態的物件有著一樣的屬性基底。
+
+@implementation
+
+
+
+#import "Circle.h"
+
+@implementation Circle
+
+@synthesize radius;
+
+-(double) getArea
+{
+return pow(radius,2) * M_PI;
+}
+
+@end
+
+pow是C語言的基本數學函式，意在做開平方的動作，其用法解釋為 : pow(半徑 , 次方)。
+
+M_PI為objective c的數學定義(define)，僅僅代表3.14159....的數。 PS : 圓面積算法為 : 半徑＊半徑＊PI。
+
+在Circle類別中已結結實實的把原本父類別的方法內容給複寫掉了，此時外部調用getArea時已不會回傳原本老爸定義的 長*寬 的內容，而是回傳圓面積的算式運算結果。
+
+@interface
+
+
+
+#import "BaseObject.h"
+
+@interface Cube : BaseObject{
+
+}
+-(double) getArea;
+
+@end
+
+為了再次證明，我們再生成一個立方體的物件做做實驗。
+
+@implementation
+
+
+
+#import "Cube.h"
+
+@implementation Cube
+
+-(double) getArea
+{
+return length * width * height;
+}
+
+@end
+
+以上三個變數都是由BaseObject這個聰明的老爸傳承下來，因為當時老爸覺得大家同是物體類，所以一定會有長寬高這三樣基本條件，而現在Cube(立方體)什麼都不用做，直接取用老子所定義的三個屬性變數即可算出體積。至於體積的公式.....去問國小老師吧 !!
+
+@main
+
+
+
+#import <Foundation/Foundation.h>
+#import "Rectangle.h"
+#import "Circle.h"
+#import "Cube.h"
+
+int main(int argc, const char * argv[])
+{
+NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+Rectangle *rectangle = [[[Rectangle alloc] init] autorelease];
+[rectangle setLength:50];
+[rectangle setWidth:10];
+NSLog(@"Rectangle Area : %.2f",[rectangle getArea]);
+
+Circle *circle = [[[Circle alloc] init] autorelease];
+[circle setRadius:10];
+NSLog(@"Circle Area : %.2f",[circle getArea]);
+
+Cube *cube = [[[Cube alloc] init] autorelease];
+[cube setLength:50];
+[cube setWidth:10];
+[cube setHeight:100];
+NSLog(@"Cube Measure : %.2f",[cube getArea]);
+
+[pool drain];
+}
+
+®輸出結果 :
+ Rectangle Area : 500.00
+ Circle Area : 78.54
+ Cube Measure : 50000.00
+
+
+以上分別生成了三個已繼承了物體基底物件的客制化物體物件，並依照自身特性初始內容屬性變數值，例如圓形算出面積只需要半徑，故圓形物件只需設定radius(半徑)的值即可。
+
+以上結果如我們預期發揮了多型與繼承的特性，提升程式書寫上的統一性，更少了一堆不必要的重複性程式碼。

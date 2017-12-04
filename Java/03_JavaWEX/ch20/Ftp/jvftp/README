@@ -1,0 +1,13 @@
+ ****** JvFTP Client ******
+
+SWING VERSION
+
+Requirements: JavaTM 2 Platform JRE 1.2+
+free download http://java.sun.com/j2se/ 	
+C:\jvftp\lib\> java -jar jvftp.jar
+
+AWT VERSION
+
+Requirements: JavaTM Platform JRE 1.1+
+free download http://java.sun.com/j2se/ 
+C:\jvftp\lib\> java -cp .\jvftp-AWT.jar cz.dhl.MetFtpCopy

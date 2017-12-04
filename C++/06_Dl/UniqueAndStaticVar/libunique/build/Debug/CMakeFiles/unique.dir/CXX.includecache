@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/alex/workspace/c++/libunique/inc/UniqueVariable.hpp
+iostream
+-
+
+/home/alex/workspace/c++/libunique/src/UniqueVariable.cpp
+../inc/UniqueVariable.hpp
+/home/alex/workspace/c++/libunique/inc/UniqueVariable.hpp
+

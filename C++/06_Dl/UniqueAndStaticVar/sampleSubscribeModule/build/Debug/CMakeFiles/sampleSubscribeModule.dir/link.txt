@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -g  -shared  -o libsampleSubscribeModule.so CMakeFiles/sampleSubscribeModule.dir/src/sampleSubscribeModule.cpp.o  -L/home/alex/workspace/c++/sampleSubscribeModule/../libunique/build/Debug -lunique -Wl,-rpath,/home/alex/workspace/c++/sampleSubscribeModule/../libunique/build/Debug 

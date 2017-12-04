@@ -1,0 +1,12 @@
+lirc.h
+	定義了lirc_dev 框架中內部會用到的一些常號和符號
+
+lirc_dev.c
+	實作提供lirc_dev Framework 並實作API:
+
+lirc_dev.h
+	實作提供 lirc_dev Framework 提供API 給二次開發者(寫lirc_rpi.c 的人):
+
+lirc_rpi.c
+	利用 lirc_dev Framework 實作GPIO IR 的 lirc device
+	提供給寫 User Space 程式的人用的。

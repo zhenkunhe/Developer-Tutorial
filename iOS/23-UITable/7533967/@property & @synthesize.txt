@@ -1,0 +1,90 @@
+在Objective C宣告的變數(variable)其對外的存取權限預設都是Protected，在受保護的情況下也就表示只有自己本身類別與繼承本身類別的物件可取用這些變數，而至於外部想取用與設定本身Class裡的變數，例如被其他類別生成使用，此種情況下其他類別是無法直接取得變數，須對每個相對應變數個別提供 get & set 給外部呼叫並回傳。而此種寫法你需提供外部取得的變數越多，這種非必要的程始碼也就越加肥大不利於閱讀，因此在Objective C裡提供了@Property的宣告和@Synthesize的對應來簡化前面提到的瑣碎動作。
+
+
+@interface
+
+
+
+#import <Foundation/Foundation.h>
+
+@interface ProAndSyn : NSObject{
+int num_1;
+int num_2;
+int num_3;
+}
+@property int num_1;
+@property int num_2;
+
+-(void)setNum_3:(int)num;
+-(int)getNum_3;
+-(int)sumNumber;
+
+@end
+
+
+比較宣告了三個變數上的差別，num_1與num_2在宣告區外都個別在多定義了一個宣告的動作 "@property  型別  變數名"。
+
+property屬性的宣告意即將宣告過的變數在編譯時自動加上 get & set方法供外部提取。
+
+而對照num_3並沒有在宣告變數的區塊外再加上@property屬性的定義，所以如果num_3要提供外部使用，我們得土法煉鋼的手動加上 get & set 方法供給外部提取。
+
+@implementation
+
+
+
+#import "ProAndSyn.h"
+
+@implementation ProAndSyn
+
+@synthesize num_1;
+@synthesize num_2;
+
+-(void)setNum_3:(int)num
+{
+num_3 = num;
+}
+-(int)getNum_3
+{
+return num_3;
+}
+-(int)sumNumber
+{
+return num_1 + num_2 + num_3;
+}
+
+@end
+
+剛剛在.h檔內曾經被定義為@property的變數在.m實作檔必定要加上對應的@synthesize，各位鄉親請注意，這個步驟將會在編譯時幫你生成每個對應變數的 getter & setter 方法。
+
+往下看看num_3這個變數的下場，在.h檔內並未將他定義為@property，所以在實作的時候，我們得手動寫兩個方法去為num_3這個變數提供外部的 getter & setter 。
+
+@main
+
+
+
+#import <Foundation/Foundation.h>
+#import "ProAndSyn.h"
+
+int main(int argc, const char * argv[])
+{
+NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+ProAndSyn *proAndSyn = [[[ProAndSyn alloc] init]autorelease];
+[proAndSyn setNum_1:10];
+[proAndSyn setNum_2:20];
+[proAndSyn setNum_3:30];
+
+NSLog(@"%d 與 %d 與 %d 的加總為: %d",[proAndSyn num_1], [proAndSyn num_2], [proAndSyn getNum_3], [proAndSyn sumNumber]);
+
+proAndSyn.num_1 = 30;
+proAndSyn.num_2 = 50;
+[proAndSyn setNum_3:20];
+
+NSLog(@"%d 與 %d 與 %d 的加總為: %d",proAndSyn.num_1, proAndSyn.num_2, [proAndSyn getNum_3], [proAndSyn sumNumber]);
+
+[pool drain];
+}
+
+®輸出結果 :
+ 10 與 20 與 30 的加總為: 60
+ 30 與 50 與 20 的加總為: 100

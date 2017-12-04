@@ -1,0 +1,19 @@
+{
+    "modules" :
+    [
+        {
+            "module name": "samplePublishModule",
+            "module path": "../samplePublishModule/build/Debug/libsamplePublishModule.so",
+            "permission": "SYSTEM",
+            "version"  : "v1.0",
+            "args": null
+        },
+        {
+            "module name" : "sampleSubscribeModule",
+            "module path" : "../sampleSubscribeModule/build/Debug/libsampleSubscribeModule.so",
+            "permission"  : "SYSTEM",
+            "version"  : "v1.0",
+            "args" : null
+        }
+    ]
+}

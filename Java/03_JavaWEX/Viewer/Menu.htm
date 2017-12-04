@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>學生實作練習</title>
+
+
+<SCRIPT>
+
+pathname=window.location.pathname
+
+var temppath=pathname.substring(1, pathname.length);
+
+var fso=new ActiveXObject("Scripting.FileSystemObject");
+
+var basepath=fso.GetFile(temppath).ParentFolder.Path;
+
+function LoadDocument(filename){
+
+	try{
+		filename = basepath + "\\" +filename;
+
+		var ForReading = 1;
+   		var fso = new ActiveXObject("Scripting.FileSystemObject");
+
+		filename = fso.GetAbsolutePathName(filename);
+
+   		var f = fso.GetFile(filename).OpenAsTextStream(1);
+
+		var code =  " ";
+		var rownum = "";
+		
+		var i=0;
+
+		while(!f.atEndOfStream){
+
+			i++;
+
+			if(i<10)
+				rownum = rownum + "00" + i + "\n";
+			else if(i>=10 && i<100)
+				rownum = rownum + "0" + i + "\n";
+			else
+				rownum = rownum + i + "\n";
+
+			code = code + f.ReadLine() + "\n ";
+		}
+		
+		window.top.frames("Main").window.path.innerText = filename;
+		window.top.frames("Main").window.code.innerText = code.substring(0, code.length-2);
+		window.top.frames("Main").window.rownum.innerText=rownum;
+		top.frames("Main").window.code.focus();		
+	}
+	catch(e){
+		alert("錯誤訊息: " + e.message);
+	}
+}
+
+function OpenConfirm() {
+
+	var intConfirm;
+
+	//try showing a confirm modal dialog
+	strFeatures = "dialogWidth=400px;dialogHeight=200px";
+	strFeatures += "scrollbars=no;center=yes;border=thin;help=no;status=no";
+	intConfirm = window.showModalDialog("security.htm", "MyDialog", strFeatures);
+	
+	if (!isNaN(intConfirm)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+		
+}  
+
+function PopModal(sExePath){
+	var bConfirmed
+	bConfirmed = OpenConfirm();
+	if (bConfirmed) {
+		top.location.href=sExePath;
+	}
+	else {
+		location.href=location.href;
+	}
+}
+</SCRIPT>
+
+</head>
+<body>
+<script language="JavaScript" src="tree/d4-43.js"></script>
+<script src="tree/link.js"></script>
+
+<PRE ID=code name="code" 
+STYLE="height:80%;background-color:white; overflow:auto; width:100%;"> 
+</PRE>
+
+</body>
+</html>

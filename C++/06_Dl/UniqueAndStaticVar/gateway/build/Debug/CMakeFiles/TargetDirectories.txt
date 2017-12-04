@@ -1,0 +1,3 @@
+/home/alex/workspace/c++/gateway/build/Debug/CMakeFiles/rebuild_cache.dir
+/home/alex/workspace/c++/gateway/build/Debug/CMakeFiles/edit_cache.dir
+/home/alex/workspace/c++/gateway/build/Debug/CMakeFiles/gateway.dir

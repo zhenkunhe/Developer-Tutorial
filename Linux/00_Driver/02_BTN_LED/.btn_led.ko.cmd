@@ -1,0 +1,1 @@
+cmd_/home/alex/git/Pegatron/Deepcam/pi2/02_BTN_LED/btn_led.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/alex/git/Pegatron/Deepcam/pi2/02_BTN_LED/btn_led.ko /home/alex/git/Pegatron/Deepcam/pi2/02_BTN_LED/btn_led.o /home/alex/git/Pegatron/Deepcam/pi2/02_BTN_LED/btn_led.mod.o ;  true

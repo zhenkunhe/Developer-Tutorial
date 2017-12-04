@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../../gatewaySDK/inc/gateway/EventAPI.h
+
+../../../gatewaySDK/inc/gateway/ModuleDefine.h
+
+../../../gatewaySDK/inc/gateway/ParameterAPI.h
+
+../../../libunique/inc/UniqueVariable.hpp
+iostream
+-
+
+/home/alex/workspace/c++/sampleSubscribeModule/src/sampleSubscribeModule.cpp
+gateway/ModuleDefine.h
+-
+gateway/ParameterAPI.h
+-
+gateway/EventAPI.h
+-
+UniqueVariable.hpp
+-
+iostream
+-
+sstream
+-
+

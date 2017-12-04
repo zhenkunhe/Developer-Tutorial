@@ -1,0 +1,56 @@
+再物件導向的觀念裡，將整個專案設計元件化，一來方便管理，一來易於重複性使用。舉Angry Bird這款有名的遊戲來說，每隻鳥都繼承自一個鳥的基底物件，而如果今天要設計一隻有新特性的鳥，我們將直接繼承鳥物件再進而針對這隻新的鳥成員新增對應程式碼。以上所說是正常物件設計情況下以繼承方式即可達成目的。但有一種特定情況，例如你想對每隻鳥都會去繼承的鳥基底物件新增一些程式碼，但是又不想直接修改程式碼而破壞原本寫好的物件結構時，在 Objective C 裡提供了Category這個速成的捷徑，它能在不更動目標物件程式碼的任何內容情況下，對該目標物件新增你想加入的程式碼片段。以下我們以最簡單的方式示範Category應用 : 
+
+
+@interface
+
+#import <Foundation/Foundation.h>
+
+@interface NSObject(StrongObject)
+
+-(void)sayHelloWorld;
+-(int)getRandNumber;
+
+@end
+首先我們在Xcode上的專案按右鍵 -> New File -> 新增Objective-C category文件，Category的名稱輸入StrongObject , Category on 部分則選擇 NSObject，此時你的專案會新增兩個文件 NSObject+StrongObject.h 與 NSObject+StrongObject.m。
+新增Category新增的方式雖然有一點點的不一樣，不過在書寫過程其實大同小異，不過卻能避免與其他類別應用搞混。
+NSObject是我們一路走來一直在繼承的基底物件，或許這時你已感到困惑，Apple提供內建的東西我們能這樣任意修改嗎? 答案當然是不能，雖然我們不作修改，但利用Category一樣能達到在外部新增對應程式碼片段的目的。而(StrongObject)則是你擴充NSObject內容的Category名稱。
+可以看到宣告了兩個沒什麼意義的方法，一切的一切只是為了證明我們真的擴充了apple底層框架提供的NSObject物件。
+還有一點需要特別注意，Category的機制沒有提供新增全域變數成員。
+@implementation
+
+#import "NSObject+StrongObject.h"
+
+@implementation NSObject(StrongObject)
+
+-(void)sayHelloWorld
+{
+   NSLog(@"Hello World");
+}
+-(int)getRandNumber
+{
+   return rand() % 10 + 1;
+}
+
+@end
+實作出"NSObject+StrongObject.h"的方法，時做完成後在此專案內所有調用甚至繼承NSObject這個Class的地方，通通都可以呼叫以上兩個新定義的方法並執行方法內的所有內容。
+順帶一提，rand() 是Objective C 提供的快速取亂數的函示。以上用意在於取1~10之間的亂數。
+@main
+
+#import <Foundation/Foundation.h>
+#import "NSObject+StrongObject.h"
+
+int main(int argc, const char * argv[])
+{
+   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+   NSObject *testObject = [[NSObject alloc] init];
+   [testObject sayHelloWorld];
+   NSLog(@"多了一個隨取亂數的功能 : %d",[testObject getRandNumber]);
+
+   [pool drain];
+}
+®輸出結果 :
+ Hello World
+ 多了一個隨取亂數的功能 : 16807
+在此我們直接調用底層框架物件NSObject來測試剛剛我們利用Category機制添加上的兩個方法是否能順利執行，結果當然是可行的。
+在某物件繼承NSObject物件時當然也能呼叫以Categoty新增出來的方法，只要以 [ self 方法名稱 ] 呼叫父類別代以執行，即可順利達成。

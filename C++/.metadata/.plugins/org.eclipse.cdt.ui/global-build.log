@@ -1,0 +1,89 @@
+16:06:19 **** Build of configuration Debug for project Test ****
+make all 
+Building file: ../src/Test.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Test.d" -MT"src/Test.o" -o "src/Test.o" "../src/Test.cpp"
+Finished building: ../src/Test.cpp
+ 
+Building target: Test
+Invoking: Cross G++ Linker
+g++  -o "Test"  ./src/Test.o   
+Finished building target: Test
+ 
+16:06:21 **** Incremental Build of configuration Debug for project Test ****
+make all 
+make: Nothing to be done for 'all'.
+16:06:51 **** Incremental Build of configuration Debug for project Test ****
+make all 
+Building file: ../src/Test.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Test.d" -MT"src/Test.o" -o "src/Test.o" "../src/Test.cpp"
+Finished building: ../src/Test.cpp
+ 
+Building target: Test
+Invoking: Cross G++ Linker
+g++  -o "Test"  ./src/Test.o   
+./src/Test.o: 於函式 main:
+/home/alex/git/alex/Developer-Tutorial/C++/Test/Debug/../src/Test.cpp:18: 未定義參考到「XOpenDisplay」
+makefile:45: recipe for target 'Test' failed
+/home/alex/git/alex/Developer-Tutorial/C++/Test/Debug/../src/Test.cpp:34: 未定義參考到「XCreateSimpleWindow」
+/home/alex/git/alex/Developer-Tutorial/C++/Test/Debug/../src/Test.cpp:37: 未定義參考到「XSelectInput」
+/home/alex/git/alex/Developer-Tutorial/C++/Test/Debug/../src/Test.cpp:40: 未定義參考到「XMapWindow」
+/home/alex/git/alex/Developer-Tutorial/C++/Test/Debug/../src/Test.cpp:46: 未定義參考到「XNextEvent」
+/home/alex/git/alex/Developer-Tutorial/C++/Test/Debug/../src/Test.cpp:57: 未定義參考到「XCloseDisplay」
+collect2: error: ld returned 1 exit status
+make: *** [Test] Error 1
+16:08:21 **** Build of configuration Debug for project Test ****
+make all 
+Building file: ../src/Test.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Test.d" -MT"src/Test.o" -o "src/Test.o" "../src/Test.cpp"
+Finished building: ../src/Test.cpp
+ 
+Building target: Test
+Invoking: GCC C++ Linker
+g++  -o "Test"  ./src/Test.o   -lX11
+Finished building target: Test
+ 
+16:08:23 **** Incremental Build of configuration Debug for project Test ****
+make all 
+make: Nothing to be done for 'all'.
+16:08:55 **** Incremental Build of configuration Debug for project Test ****
+make all 
+Building file: ../src/Test.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Test.d" -MT"src/Test.o" -o "src/Test.o" "../src/Test.cpp"
+Finished building: ../src/Test.cpp
+ 
+Building target: Test
+Invoking: GCC C++ Linker
+g++  -o "Test"  ./src/Test.o   -lX11
+Finished building target: Test
+ 
+16:09:20 **** Incremental Build of configuration Debug for project Test ****
+make all 
+Building file: ../src/Test.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Test.d" -MT"src/Test.o" -o "src/Test.o" "../src/Test.cpp"
+Finished building: ../src/Test.cpp
+ 
+Building target: Test
+Invoking: GCC C++ Linker
+g++  -o "Test"  ./src/Test.o   -lX11
+Finished building target: Test
+ 
+16:09:26 **** Incremental Build of configuration Debug for project Test ****
+make all 
+make: Nothing to be done for 'all'.
+16:09:31 **** Incremental Build of configuration Debug for project Test ****
+make all 
+Building file: ../src/Test.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Test.d" -MT"src/Test.o" -o "src/Test.o" "../src/Test.cpp"
+Finished building: ../src/Test.cpp
+ 
+Building target: Test
+Invoking: GCC C++ Linker
+g++  -o "Test"  ./src/Test.o   -lX11
+Finished building target: Test
+ 

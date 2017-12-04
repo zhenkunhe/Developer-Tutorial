@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -g  -shared  -o libsamplePublishModule.so CMakeFiles/samplePublishModule.dir/src/samplePublishModule.cpp.o  -L/home/alex/workspace/c++/samplePublishModule/../libunique/build/Debug -lunique -Wl,-rpath,/home/alex/workspace/c++/samplePublishModule/../libunique/build/Debug 

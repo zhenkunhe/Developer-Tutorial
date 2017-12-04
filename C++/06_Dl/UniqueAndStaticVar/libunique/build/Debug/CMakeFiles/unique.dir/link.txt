@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -g  -shared  -o libunique.so CMakeFiles/unique.dir/src/UniqueVariable.cpp.o 

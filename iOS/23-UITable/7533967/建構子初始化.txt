@@ -1,0 +1,81 @@
+呈上所提到的init初始化物件，現在將實現帶入參數做物件初始化。簡易來說就像是你在生成一個物件來使用的當下，物件會依你傳入的參數做為參考並改變初始內容。以下做簡易示範:
+@interface
+
+#import <Foundation/Foundation.h>
+
+@interface Person : NSObject{
+   NSString *m_name;
+   int m_age;
+   int m_studentID;
+}
+-(id)initWithName:(NSString*)name andAge:(int)age andID:(int)ID;
+-(void)setStudentName:(NSString*)name;
+-(void)setStudentAge:(int)age;
+-(void)setStudentID:(int)num;
+-(void)showStudentInfo;
+
+@end
+建立起一個學生人物的物件Class，裡面包含了三個屬性成員->姓名,年齡,學號。 
+NSString為Objective C的字串物件，在Objective C裡除了基本型別外只要是物件型別通通都要以指標表示，同時也意味著一經初始後，最後仍須釋放記憶體。PS:指標變數宣告須在變數名稱前加上 ‘ * ’
+宣告五個方法提供外部呼叫。PS : 方法如需傳入多參數寫法如下 (傳入型別)參數名 (傳入型別)參數名 ...
+@implementation
+
+#import "Person.h"
+
+@implementation Person
+
+-(id)initWithName:(NSString*)name andAge:(int)age andID:(int)ID
+{
+   [super init];
+
+   m_name = name;
+   m_age = age;
+   m_studentID = ID;
+
+   return self;
+}
+-(void)setStudentName:(NSString*)name
+{
+   m_name = name;
+}
+-(void)setStudentAge:(int)age
+{
+   m_age = age;
+}
+-(void)setStudentID:(int)id
+{
+   m_studentID = id;
+}
+-(void)showStudentInfo
+{
+   NSLog(@"學生姓名 : %@ 年紀 : %d 學號 : %d",m_name,m_age,m_studentID);
+}
+@end
+在此我們客制化定義了一個方法做為初始化物件方法，首先-(id)回傳型別為任意型別，在方法名稱隨要求了三個做為定義資料的參數。
+建構子最關鍵的地方[super init]，別忘了我們的物件都繼承了NSObject這個老爸，所以super代表呼叫父類別的關鍵字，而init當然就是你老爸NSObject的建構子。在此順帶一提在Objective C裡的物件框架設計不論你繼承了什麼物件，其最基底都由它"NSObject"做為根基。
+在建構子方法內將所有變數初始化完成後，即以 self 回傳自己的位址。簡單說就是把自己的記憶體位置回傳給呼叫此方法的人，接收到後在把接收到的記憶體位址指向宣告的指標變數以供使用。
+@main
+
+#import <Foundation/Foundation.h>
+#import "Person.h"
+
+int main(int argc, const char * argv[])
+{
+   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+   Person *person_1 = [[Person alloc] init];
+   [person_1 setStudentName:@"叮叮"];
+   [person_1 setStudentAge:22];
+   [person_1 setStudentID:88779];
+
+   Person *person_2 = [[Person alloc] initWithName:@"噹噹" andAge:25 andID:66993];
+
+   [person_1 showStudentInfo];
+   [person_2 showStudentInfo];
+
+   [pool drain]; //將記憶體儲存池清空
+}
+
+®輸出結果 :
+ 學生姓名 : 叮叮 年紀 : 22 學號 : 88779
+ 學生姓名 : 噹噹 年紀 : 25 學號 : 66993
