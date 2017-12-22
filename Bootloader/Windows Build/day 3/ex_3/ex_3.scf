@@ -1,0 +1,17 @@
+RAM_LOAD 0x00008000 0x300000
+{
+    RAM_INIT 0x00008000 0x280000
+    {
+    	ex_3_boot.o	(Boot, +First)
+    	ex_3_boot.o	(+RO, +RW, +ZI)
+        My_Main.o
+        *		(+RO, +RW, +ZI)
+
+    }
+    
+    RAM_RUN 0x00000000 0x80000
+    {
+        ex_3.o		(Init, +First)
+        ex_3.o		(+RO, +RW, +ZI)
+    }
+}
